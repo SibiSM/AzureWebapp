@@ -1,0 +1,6 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<p>File "{{ filename }}" uploaded successfully.</p>
+<a href="{{ url_for('main.index') }}">Back</a>
+{% endblock %}
