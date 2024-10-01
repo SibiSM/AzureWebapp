@@ -18,7 +18,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Set up Python version
-        uses: actions/setup-python@v1
+        uses: actions/setup-python@v5
         with:
           python-version: '3.12'
 
@@ -36,7 +36,7 @@ jobs:
         run: zip release.zip ./* -r
 
       - name: Upload artifact for deployment jobs
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: python-app
           path: |
@@ -54,7 +54,7 @@ jobs:
 
     steps:
       - name: Download artifact from build job
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: python-app
 
@@ -63,14 +63,14 @@ jobs:
 
       
       - name: Login to Azure
-        uses: azure/login@v1
+        uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_24890351A5F0456786E5D04602477B49 }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_8DC048CBC34D47C7B5B3229038DCFD28 }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_5DA39177FC884DD988A1B62C5C5DE06E }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_ED9C1A2B014440A6A0CD3A59B118650E }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_3788F2DD3B4E48BFB713B767F487BC6D }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_19DC2FE78BDF4E98BFED22405898F5A6 }}
 
       - name: 'Deploy to Azure Web App'
-        uses: azure/webapps-deploy@v2
+        uses: azure/webapps-deploy@v3
         id: deploy-to-webapp
         with:
           app-name: 'webappmodulesibi'
