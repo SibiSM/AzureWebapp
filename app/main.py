@@ -12,7 +12,7 @@ main = Blueprint('main', __name__)
 # Replace with your storage account name
 storage_account_name = 'storageblobsibi'
 # Access storage account key from environment variable
-storage_account_key = 'uCfftD6zRe7WpX1in9gCx7P7oOLkzbflU7DTxnC8Tvw6dwgJDwL3zKBE/uOizOmNfetRFtxwr8yf+AStayDrmQ=='
+storage_account_key = 'Ig/VgQNy+l9ts4NNZ/yqyGItfMBnO/QgbwMkX86P9yAxyUJSfsazonsn5EYU0UFEU1UfYAA6tiFT+AStZWUuQQ=='
 container_name = 'containerstorage'
 
 connect_str = f"DefaultEndpointsProtocol=https;AccountName={storage_account_name};AccountKey={storage_account_key};EndpointSuffix=core.windows.net"
