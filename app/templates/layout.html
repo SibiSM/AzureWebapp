@@ -3,12 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ title }}</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>{% block title %}My Web App{% endblock %}</title>
 </head>
 <body>
     <header>
-        <h1>{{ title }}</h1>
+        <h1>My Web Application</h1>
         <nav>
             <a href="{{ url_for('main.index') }}">Home</a>
             <a href="{{ url_for('main.about') }}">About</a>
