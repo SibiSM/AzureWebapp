@@ -1,7 +1,8 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
+# More info on Python, GitHub Actions, and Azure App Service: https://aka.ms/python-webapps-actions
 
-name: Build and deploy Node.js app to Azure Web App - sibidashboard
+name: Build and deploy Python app to Azure Web App - sibidashboard
 
 on:
   push:
@@ -11,27 +12,36 @@ on:
 
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up Node.js version
-        uses: actions/setup-node@v3
+      - name: Set up Python version
+        uses: actions/setup-python@v5
         with:
-          node-version: '20.x'
+          python-version: '3.12'
 
-      - name: npm install, build, and test
+      - name: Create and start virtual environment
         run: |
-          npm install
-          npm run build --if-present
-          npm run test --if-present
+          python -m venv venv
+          source venv/bin/activate
       
-      - name: Upload artifact for deployment job
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+        
+      # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
+
+      - name: Zip artifact for deployment
+        run: zip release.zip ./* -r
+
+      - name: Upload artifact for deployment jobs
         uses: actions/upload-artifact@v4
         with:
-          name: node-app
-          path: .
+          name: python-app
+          path: |
+            release.zip
+            !venv/
 
   deploy:
     runs-on: ubuntu-latest
@@ -46,14 +56,18 @@ jobs:
       - name: Download artifact from build job
         uses: actions/download-artifact@v4
         with:
-          name: node-app
+          name: python-app
+
+      - name: Unzip artifact for deployment
+        run: unzip release.zip
+
       
       - name: Login to Azure
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_2B86740C8C36455097A81897FD2A6F8D }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_64BA33D5D2E74715A522D2AB8FB8D676 }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_C53E4D818A044FA18543C914B591E1FA }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_4EFB9299950C46F48B8C22EAA8BF437A }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_8098810CAC8F40A2928EE25A5BB66374 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_F23E70299BE64FC29B8BCE3FB62D53C1 }}
 
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v3
@@ -61,5 +75,4 @@ jobs:
         with:
           app-name: 'sibidashboard'
           slot-name: 'Production'
-          package: .
           
