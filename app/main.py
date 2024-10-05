@@ -19,7 +19,7 @@ connect_str = f"DefaultEndpointsProtocol=https;AccountName={storage_account_name
 blob_service_client = BlobServiceClient.from_connection_string(connect_str)
 
 # Application Insights setup
-instrumentation_key = '710443bc-9d4e-43a4-9674-7d889501eaa5'  # Replace with your actual instrumentation key
+instrumentation_key = 'c9ae528c-355b-4345-83a2-8c2f2c6d341d'  # Replace with your actual instrumentation key
 logger = logging.getLogger(__name__)
 logger.addHandler(AzureLogHandler(connection_string=f'InstrumentationKey={instrumentation_key}'))
 
