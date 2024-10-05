@@ -38,9 +38,15 @@ def upload():
     file = request.files['file']
     if file:
         blob_client = blob_service_client.get_blob_client(container=container_name, blob=file.filename)
-        blob_client.upload_blob(file)
-        logger.info(f'File uploaded: {file.filename}')
+        
+        # Upload the file and overwrite if it already exists
+        blob_client.upload_blob(file, overwrite=True)
+        
+        logger.info(f'File uploaded/overwritten: {file.filename}')
         return redirect(url_for('main.upload_success', filename=file.filename))
+    else:
+        logger.warning('No file provided for upload')
+        return redirect(url_for('main.index'))  # Redirect back to index or handle accordingly
 
 @main.route('/upload_success')
 def upload_success():
