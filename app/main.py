@@ -6,7 +6,6 @@ import os
 from . import db
 
 # Load environment variables from .env file
-
 main = Blueprint('main', __name__)
 
 # Azure Blob Storage details
