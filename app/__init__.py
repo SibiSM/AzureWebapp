@@ -21,7 +21,7 @@ def create_app():
     app.register_blueprint(main_blueprint)
 
     # Integrate Application Insights
-    connection_string = "InstrumentationKey=c9ae528c-355b-4345-83a2-8c2f2c6d341d;IngestionEndpoint=https://eastus-8.in.applicationinsights.azure.com/;LiveEndpoint=https://eastus.livediagnostics.monitor.azure.com/;ApplicationId=f7d7fa41-0dcf-4f8a-bbbc-d6fb4eb58bee"
+    connection_string = "InstrumentationKey=c0ea5ef5-8f84-4d0a-9356-8c3b7770edb3;IngestionEndpoint=https://eastus-8.in.applicationinsights.azure.com/;LiveEndpoint=https://eastus.livediagnostics.monitor.azure.com/;ApplicationId=1ea7e08a-141e-4aa2-89d2-bb43c79ea3e4"
 
     # Logger configuration for Azure Application Insights
     logger = logging.getLogger(__name__)
